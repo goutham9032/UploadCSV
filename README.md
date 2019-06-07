@@ -1,6 +1,6 @@
 # UploadCSV
 
-This projects will take the csv file as an input from browser that contains name,sku,description fields and search and render those details in the form of an table and where user can search the required field.
+This projects will take the csv file as an input from browser that contains name,sku,description fields and render those details in the form of an table and user can search the records by typing keyword in search box.
 
 # UI 
 ![uploadcsvui](https://user-images.githubusercontent.com/35727060/59103830-864a1580-894d-11e9-8e45-9108ae8c84c1.png)
