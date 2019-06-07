@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-10">
+				 <h2 align="center" class="page_title">Upload CSV and search data</h2>
+				 <form method="POST" enctype="multipart/form-data" class="form-horizontal" id="file_upload_form">
+					{% csrf_token %}
+					<div class="form-group file_upload_div">
+						<div class="col-sm-9">
+							<input type="file" name="csv_file" id="ip_csv_file" required="True" class="form-control" accept=".csv">
+							<button class="btn btn-info" id="upload_csv" disabled>
+									 <i class="fa fa-spinner fa-spin no_display"></i>
+									 <span class="glyphicon glyphicon-upload" style="margin-right:5px;">Upload File</span>
+							</button>
+						</div>
+                        <div class="note_div">
+                             <strong>Note:</strong>
+                              Files with .csv extension only be uploaded here.
+                        </div>
+					</div>
+				 </form>
+                 <div class="search_div">
+					   <div align="center">
+					   </div>
+                 </div>
+           </div>
+       </div>
+    </div>
+    <div class="container-fluid">
+         <div class="row">
+				<div class="col-sm-2 filter_col">
+                    <div class="filter_box">
+						<p>Filter By</p>
+						<div class="checkbox">
+						  <label>
+                              <input type="checkbox" name="filter" value="name" checked><span>Name<span></label>
+						</div>
+						<div class="checkbox">
+						  <label><input type="checkbox" name="filter" value="sku" checked><span>Sku</span></label>
+						</div>
+						<div class="checkbox">
+						  <label><input type="checkbox" name="filter" value="desc" checked><span>Description<span></label>
+						</div>
+						<div class="checkbox">
+						  <label><input type="checkbox" name="highlight" checked><span>Highlight search term<span></label>
+						</div>
+                    </div>
+							<button class="btn btn-info" id="delete_data">
+                                <span><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;Delete Data</span>
+							</button>
+
+				</div>
+				<div class="col-sm-8">
+					 <div class="search_div">
+						   <div align="center">
+							<input type="text" name="search" id="search" placeholder="Search keyword" class="form-control" />
+						   </div>
+					 </div>
+                     <div class="tab_spinner no_display">
+                         <i class="fa fa-spinner fa-spin" style="font-size:3rem;"></i>
+                     </div>
+                     <div id="results_div">
+                     </div>
+                     <div id="user-data-table">
+                          {% if results  %}
+                             {% include 'table.html' %}
+                          {% else %}
+							  <div class="no_records">
+									<div><i class="fa fa-database"></i></div>
+									<div class="ml-3">
+										<h5 class="mt-1"> No records found</h5>
+										<p class="no-results-text">
+											Add records that you want to view
+										</p>
+									</div>
+							  </div>
+                           {% endif %}
+                     </div>
+				</div>
+          </div>
+    </div>
+{% endblock %}
+
+
