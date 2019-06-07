@@ -43,10 +43,12 @@ def get_search_results(request):
     then it will search for `test` in name,sku,description and return match results
     op : [{'name': 'test', 'sku': 'test product', 'description':'testing works well'}]
     '''
-
+    
     query = request.GET.get('q')
     filters = request.GET.get('filters')
     filters_list = filters.split(',')
+
+    LOG.info('get_search_reults', q=query, filters=filters_list)
     if 'name,sku,desc' in filters:
        fil_query = Q(name__icontains=query) | Q(sku__icontains=query) | Q(description__icontains=query)
     elif filters_list == ['name', 'sku']:
@@ -71,6 +73,7 @@ def home(request):
     function to open home page and render the first 100 results instead of all
     to minimise load time
     '''
+    LOG.info('homepage_opened')
     results = UploadCsv.objects.all()
     return render(request, 'upload_csv.html', dict(results=results[:100]))
 
@@ -82,7 +85,6 @@ def upload_csv(request):
     csv_obj = request.FILES["csv_file"]
     file_name = csv_obj.name
     file_location = '/tmp/%s'%(file_name)
-
     with open(file_location, 'wb+') as f:
          for chunk in csv_obj.chunks():
              f.write(chunk)
@@ -108,6 +110,7 @@ def delete_records(request):
     '''
     funtion to delete records from the database
     '''
+    LOG.info('delete_records')
     try:
        UploadCsv.objects.all().delete()
        return JsonResponse({'success':True})

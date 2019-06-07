@@ -27,7 +27,7 @@ SECRET_KEY = 'd(5uo*6!1xgv-r!6i#_br^rtk=9dfus_w8=_im9+_sv5h*i8_h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -128,6 +128,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 LOG = init_logger(
         fmt = None,
         quiet = False,
+        fpath='/var/log/uploadcsv.log',
         level = 'INFO',
         pre_hooks = [],
         post_hooks = [],
